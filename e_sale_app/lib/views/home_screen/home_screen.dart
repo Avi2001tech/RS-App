@@ -24,7 +24,7 @@ class HomeScreen extends StatelessWidget {
             height: 60,
             color: lightGrey,
             child: TextFormField(
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                   border: InputBorder.none,
                   suffixIcon: Icon(Icons.search),
                   filled: true,
@@ -33,6 +33,8 @@ class HomeScreen extends StatelessWidget {
                   hintStyle: TextStyle(color: textfieldGrey)),
             ),
           ),
+
+          //first swiper
           10.heightBox,
           Expanded(
               child: SingleChildScrollView(
@@ -58,18 +60,22 @@ class HomeScreen extends StatelessWidget {
                             .make(),
                       );
                     }),
+
+                // deals and flash buttons;
                 10.heightBox,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: List.generate(
                       2,
                       (index) => homeButtons(
-                            width: context.screenWidth / 2.5,
-                            height: context.screenHeight * 0.15,
+                            width: context.screenWidth / 3.5,
+                            height: context.screenHeight * 0.19,
                             icon: index == 0 ? icTodaysDeal : icFlashDeal,
                             title: index == 0 ? todaydeal : flashsale,
                           )),
                 ),
+
+                // 2nd swiper
                 10.heightBox,
                 VxSwiper.builder(
                     aspectRatio: 16 / 9,
@@ -90,12 +96,21 @@ class HomeScreen extends StatelessWidget {
                             .make(),
                       );
                     }),
+
+                // category,brand,top sellers
                 10.heightBox,
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: List.generate(
-                      3,
-                      (index) => homeButtons(
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: List.generate(
+                        3,
+                        (index) => Container(
+                          margin: const EdgeInsets.symmetric(
+                              horizontal: 8.0), // Adjust the margin as needed
+                          child: homeButtons(
                             width: context.screenWidth / 3.5,
                             height: context.screenHeight * 0.15,
                             icon: index == 0
@@ -108,9 +123,15 @@ class HomeScreen extends StatelessWidget {
                                 : index == 1
                                     ? brand
                                     : topSellers,
-                          )),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
-                10.heightBox,
+
+                //featured category
+                20.heightBox,
                 Align(
                   alignment: Alignment.centerLeft,
                   child: featuredCategory.text
@@ -119,7 +140,9 @@ class HomeScreen extends StatelessWidget {
                       .fontFamily(semibold)
                       .make(),
                 ),
-                20.heightBox,
+
+                //featured products
+                5.heightBox,
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
@@ -138,6 +161,8 @@ class HomeScreen extends StatelessWidget {
                             )).toList(),
                   ),
                 ),
+
+                //featured category
                 20.heightBox,
                 Container(
                   padding: const EdgeInsets.all(12),
@@ -189,6 +214,8 @@ class HomeScreen extends StatelessWidget {
                     ],
                   ),
                 ),
+
+                //3rd swiper
                 20.heightBox,
                 VxSwiper.builder(
                     aspectRatio: 16 / 9,
@@ -209,48 +236,83 @@ class HomeScreen extends StatelessWidget {
                             .make(),
                       );
                     }),
+
+                //grid view
                 20.heightBox,
                 GridView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: 6,
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            mainAxisSpacing: 8,
-                            crossAxisSpacing: 8,
-                            mainAxisExtent: 300),
-                    itemBuilder: (context, index) {
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Image.asset(
-                            imgP5,
-                            width: 200,
-                            height: 200,
-                            fit: BoxFit.cover,
-                          ),
-                          const Spacer(),
-                          "Laptop 4GB/64GB"
-                              .text
-                              .color(darkFontGrey)
-                              .fontFamily(semibold)
-                              .make(),
-                          10.heightBox,
-                          "Rs 120"
-                              .text
-                              .color(darkBlue)
-                              .fontFamily(bold)
-                              .size(16)
-                              .make(),
-                        ],
-                      )
-                          .box
-                          .white
-                          .margin(const EdgeInsets.symmetric(horizontal: 4))
-                          .roundedSM
-                          .make();
-                    })
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: 6,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    mainAxisSpacing:
+                        16, // Increased spacing for a more open layout
+                    crossAxisSpacing:
+                        16, // Increased spacing for a more open layout
+                    mainAxisExtent: 280, // Increased card height
+                  ),
+                  itemBuilder: (context, index) {
+                    return GestureDetector(
+                      onTap: () {
+                        // Handle the tap event here
+                      },
+                      child: Card(
+                        elevation: 4.0, // Add elevation for a card-like effect
+                        shape: RoundedRectangleBorder(
+                          borderRadius:
+                              BorderRadius.circular(12.0), // Rounded corners
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.vertical(
+                                  top: Radius.circular(
+                                      12.0), // Rounded top corners
+                                ),
+                                child: Image.asset(
+                                  imgP5,
+                                  width: double.infinity,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(
+                                  12.0), // Increased padding
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Laptop 4GB/64GB",
+                                    style: TextStyle(
+                                      color: darkFontGrey,
+                                      fontFamily: semibold,
+                                      fontSize: 18, // Larger font size
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  SizedBox(height: 8.0),
+                                  Text(
+                                    "Rs 120/kg",
+                                    style: TextStyle(
+                                      color: darkBlue,
+                                      fontFamily: bold,
+                                      fontSize: 14, // Larger font size
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                )
+
+// end of home screen
               ],
             ),
           )),

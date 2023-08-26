@@ -4,16 +4,16 @@ Widget detailsCard({width, String? count, String? title}) {
   return Column(
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
-      "00".text.white.fontFamily(bold).size(16).make(),
+      count!.text.black.fontFamily(semibold).size(25).make(),
       5.heightBox,
-      "Orders".text.white.make(),
+      title!.text.color(darkBlue).make(),
     ],
   )
       .box
       .white
       .rounded
       .width(width)
-      .height(80)
+      .height(100)
       .padding(const EdgeInsets.all(8))
       .make();
 }

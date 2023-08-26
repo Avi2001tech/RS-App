@@ -2,6 +2,7 @@ import 'package:e_sale_app/consts/consts.dart';
 import 'package:e_sale_app/consts/list.dart';
 import 'package:e_sale_app/views/profile_screen/components/details_card.dart';
 import 'package:e_sale_app/widgets_common/bg_widget.dart';
+import 'package:e_sale_app/widgets_common/bg_widget2.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
@@ -10,14 +11,14 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return bgWidget(
+    return bgWidget2(
       child: Scaffold(
         body: SafeArea(
             child: Container(
           child: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.fromLTRB(8, 16, 8, 0),
                 child: const Align(
                   alignment: Alignment.topRight,
                   child: Icon(
@@ -26,6 +27,8 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ).onTap(() {}),
               ),
+
+              //account
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
                 child: Row(
@@ -42,7 +45,7 @@ class ProfileScreen extends StatelessWidget {
                       children: [
                         "Dummy User".text.fontFamily(semibold).white.make(),
                         5.heightBox,
-                        "avidevelopers@gmail.com".text.make(),
+                        "avidev@gmail.com".text.white.make(),
                       ],
                     )),
                     OutlinedButton(
@@ -51,12 +54,14 @@ class ProfileScreen extends StatelessWidget {
                         color: whiteColor,
                       )),
                       onPressed: () {},
-                      child: logout.text.make(),
+                      child: logout.text.white.make(),
                     ),
                   ],
                 ),
               ),
-              20.heightBox,
+
+              //score
+              30.heightBox,
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -74,6 +79,7 @@ class ProfileScreen extends StatelessWidget {
                       title: "your orders"),
                 ],
               ),
+              20.heightBox,
               ListView.separated(
                 shrinkWrap: true,
                 separatorBuilder: (context, index) {

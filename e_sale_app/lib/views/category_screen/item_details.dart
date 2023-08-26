@@ -26,66 +26,85 @@ class ItemDetails extends StatelessWidget {
                   Icons.favorite_outline,
                 )),
           ]),
-      body: Column(
-        children: [
-          Expanded(
-              child: Padding(
-            padding: const EdgeInsets.all(8),
-            child: SingleChildScrollView(
+
+      //main body
+
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Container(
+              height: 250,
+              child: VxSwiper.builder(
+                autoPlay: true,
+                aspectRatio: 16 / 9,
+                itemCount: 3,
+                itemBuilder: (context, index) {
+                  return Image.asset(
+                    imgFc5,
+                    height: 180,
+                    fit: BoxFit.fill,
+                  );
+                },
+              ),
+            ),
+
+            //product name,rating and price
+            Padding(
+              padding: const EdgeInsets.all(8.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  VxSwiper.builder(
-                      autoPlay: true,
-                      height: 350,
-                      aspectRatio: 16 / 9,
-                      itemCount: 3,
-                      itemBuilder: (context, index) {
-                        return Image.asset(
-                          imgFc10,
-                          width: double.infinity,
-                          fit: BoxFit.cover,
-                        );
-                      }),
-                  10.heightBox,
                   title!.text
                       .size(16)
                       .color(darkFontGrey)
                       .fontFamily(semibold)
                       .make(),
-                  10.heightBox,
-                  VxRating(
-                    onRatingUpdate: (value) {},
-                    normalColor: textfieldGrey,
-                    selectionColor: golden,
-                    maxRating: 5,
-                    size: 25,
-                    count: 4,
-                    stepInt: true,
+                  5.heightBox,
+                  Container(
+                    width: 250,
+                    child: VxRating(
+                      onRatingUpdate: (value) {},
+                      normalColor: textfieldGrey,
+                      selectionColor: golden,
+                      maxRating: 10,
+                      size: 25,
+                      count: 4,
+                      stepInt: true,
+                    ),
                   ),
-
-                  10.heightBox,
+                  5.heightBox,
                   "Rs 250/kg"
                       .text
                       .color(darkBlue)
                       .fontFamily(semibold)
-                      .size(18)
+                      .size(16)
                       .make(),
 
-                  10.heightBox,
+                  //product seller and description
+                  20.heightBox,
                   Row(
                     children: [
                       Expanded(
-                          child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          "Seller".text.white.fontFamily(semibold).make(),
-                          5.heightBox,
-                          "kuch likhega yaha".text.make()
-                        ],
-                      )),
-                      const CircleAvatar(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            "Seller"
+                                .text
+                                .black
+                                .fontFamily(bold)
+                                .size(16)
+                                .make(),
+                            5.heightBox,
+                            "Product description hoga yaha , jaise wo kise banan hua hai and others blah blah"
+                                .text
+                                .color(darkBlue)
+                                .make(),
+                          ],
+                        ),
+                      ),
+                      CircleAvatar(
                         backgroundColor: Colors.white,
                         child: Icon(
                           Icons.message_rounded,
@@ -95,24 +114,25 @@ class ItemDetails extends StatelessWidget {
                     ],
                   )
                       .box
-                      .color(darkFontGrey)
+                      .color(Colors.white24)
                       .height(70)
                       .padding(const EdgeInsets.symmetric(horizontal: 8))
                       .make(),
 
-                  // colour section
-
+                  // Quantity section
                   10.heightBox,
                   Row(
                     children: [
                       SizedBox(
                         width: 100,
-                        child: "Quantity: ".text.color(textfieldGrey).make(),
+                        child: "Quantity: ".text.black.make(),
                       ),
                       Row(
                         children: [
                           IconButton(
-                              onPressed: () {}, icon: const Icon(Icons.remove)),
+                            onPressed: () {},
+                            icon: Icon(Icons.remove),
+                          ),
                           "0"
                               .text
                               .size(16)
@@ -121,19 +141,20 @@ class ItemDetails extends StatelessWidget {
                               .make(),
                           10.widthBox,
                           IconButton(
-                              onPressed: () {}, icon: const Icon(Icons.add)),
-                          "(0 available)".text.size(16).color(fontGrey).make(),
+                            onPressed: () {},
+                            icon: Icon(Icons.add),
+                          ),
+                          "(0 available)".text.size(16).blue800.make(),
                         ],
                       ),
                     ],
                   ).box.padding(const EdgeInsets.all(8)).white.shadowSm.make(),
-
                   10.heightBox,
                   Row(
                     children: [
                       SizedBox(
                         width: 100,
-                        child: "Total: ".text.color(textfieldGrey).make(),
+                        child: "Total: ".text.size(16).black.make(),
                       ),
                       "Rs 0.00"
                           .text
@@ -143,7 +164,6 @@ class ItemDetails extends StatelessWidget {
                           .make(),
                     ],
                   ).box.padding(const EdgeInsets.all(8)).white.shadowSm.make(),
-
                   10.heightBox,
                   "Description"
                       .text
@@ -155,81 +175,82 @@ class ItemDetails extends StatelessWidget {
                       .text
                       .color(darkFontGrey)
                       .make(),
-
                   10.heightBox,
-                  ListView(
+                  ListView.builder(
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    children: List.generate(
-                        itemDetailsButtonList.length,
-                        (index) => ListTile(
-                              title: itemDetailsButtonList[index]
-                                  .text
-                                  .fontFamily(semibold)
-                                  .make(),
-                              trailing: const Icon(Icons.arrow_forward_ios),
-                            )),
+                    itemCount: itemDetailsButtonList.length,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        title: itemDetailsButtonList[index]
+                            .text
+                            .fontFamily(semibold)
+                            .make(),
+                        trailing: Icon(Icons.arrow_forward_ios),
+                      );
+                    },
                   ),
-
                   20.heightBox,
-                  productsyoumaylike.text
+                  "Products You May Like"
+                      .text
                       .color(darkFontGrey)
                       .fontFamily(bold)
                       .size(16)
                       .make(),
-
                   10.heightBox,
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(
                       children: List.generate(
-                          6,
-                          (index) => Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Image.asset(
-                                    imgP1,
-                                    width: 150,
-                                    fit: BoxFit.cover,
-                                  ),
-                                  10.heightBox,
-                                  "Laptop 4GB/64GB"
-                                      .text
-                                      .color(darkFontGrey)
-                                      .fontFamily(semibold)
-                                      .make(),
-                                  10.heightBox,
-                                  "Rs 120"
-                                      .text
-                                      .color(darkBlue)
-                                      .fontFamily(bold)
-                                      .size(16)
-                                      .make(),
-                                ],
-                              )
-                                  .box
-                                  .white
-                                  .margin(
-                                      const EdgeInsets.symmetric(horizontal: 4))
-                                  .roundedSM
-                                  .padding(EdgeInsets.all(8))
-                                  .make()),
+                        6,
+                        (index) {
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Image.asset(
+                                imgP1,
+                                width: 150,
+                                fit: BoxFit.cover,
+                              ),
+                              10.heightBox,
+                              "Laptop 4GB/64GB"
+                                  .text
+                                  .color(darkFontGrey)
+                                  .fontFamily(semibold)
+                                  .make(),
+                              10.heightBox,
+                              "Rs 120"
+                                  .text
+                                  .color(darkBlue)
+                                  .fontFamily(bold)
+                                  .size(16)
+                                  .make(),
+                            ],
+                          )
+                              .box
+                              .white
+                              .margin(const EdgeInsets.symmetric(horizontal: 4))
+                              .roundedSM
+                              .padding(EdgeInsets.all(8))
+                              .make();
+                        },
+                      ),
                     ),
                   ),
                 ],
               ),
             ),
-          )),
-          SizedBox(
-            width: double.infinity,
-            height: 60,
-            child: ourButton(
+            SizedBox(
+              height: 60,
+              child: ourButton(
                 color: darkBlue,
                 onPress: () {},
                 textcolor: whiteColor,
-                title: "Add to Cart"),
-          ),
-        ],
+                title: "Add to Cart",
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
