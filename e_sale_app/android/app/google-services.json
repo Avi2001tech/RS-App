@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "187680606515",
+    "project_id": "rsattu-a0a9e",
+    "storage_bucket": "rsattu-a0a9e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:187680606515:android:aa47700f1dbd315fe2d646",
+        "android_client_info": {
+          "package_name": "com.example.e_sale_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "187680606515-ajo86db263surb8svv40ntus2r4bffe5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.e_sale_app",
+            "certificate_hash": "0b3220ce830aff62523443c9d109fefd3a0197a3"
+          }
+        },
+        {
+          "client_id": "187680606515-h62kfjt3ctlian1775bftr9sv16eh0jr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCarbPaE4UeZHE6RGNq_OrCXcKg5evVn0M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "187680606515-h62kfjt3ctlian1775bftr9sv16eh0jr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

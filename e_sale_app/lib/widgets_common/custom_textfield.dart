@@ -2,15 +2,17 @@ import 'dart:ui';
 
 import 'package:e_sale_app/consts/consts.dart';
 
-Widget customTextField({String? title, String? hint, controller}) {
+Widget customTextField({String? title, String? hint, controller, isPass}) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       title!.text.color(darkBlue).fontFamily(semibold).size(16).make(),
       10.heightBox,
       TextFormField(
+        obscureText: isPass,
+        controller: controller,
         decoration: InputDecoration(
-          hintStyle: TextStyle(
+          hintStyle: const TextStyle(
             fontFamily: semibold,
             color: textfieldGrey,
           ),
@@ -20,7 +22,7 @@ Widget customTextField({String? title, String? hint, controller}) {
           filled: true,
           border: InputBorder.none,
           focusedBorder:
-              OutlineInputBorder(borderSide: BorderSide(color: redColor)),
+              const OutlineInputBorder(borderSide: BorderSide(color: redColor)),
         ),
       ),
       3.heightBox,

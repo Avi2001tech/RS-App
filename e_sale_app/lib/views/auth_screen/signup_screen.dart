@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'package:e_sale_app/controllers/auth_controller.dart';
+import 'package:e_sale_app/views/home_screen/home.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
@@ -20,6 +22,13 @@ class SignupScreen extends StatefulWidget {
 
 class _SignupScreenState extends State<SignupScreen> {
   bool? isCheck = false;
+  var controller = Get.put(AuthController());
+
+  //text controllers
+  var nameController = TextEditingController();
+  var emailController = TextEditingController();
+  var passwordController = TextEditingController();
+  var passwordRetypeController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -30,16 +39,6 @@ class _SignupScreenState extends State<SignupScreen> {
           child: Column(
         children: [
           (context.screenHeight * 0.25).heightBox,
-          //applogoWidget(),
-          // "Log in to".text.make(),
-          // "$appname"
-          //     .text
-          //     .fontFamily(bold)
-          //     .underline
-          //     .italic
-          //     .blue900
-          //     .size(18)
-          //     .make(),
           5.heightBox,
           Column(
             children: [
@@ -53,10 +52,26 @@ class _SignupScreenState extends State<SignupScreen> {
                   .size(18)
                   .make(),
               10.heightBox,
-              customTextField(title: name, hint: nameHint),
-              customTextField(title: email, hint: emailHint),
-              customTextField(title: password, hint: passwordHint),
-              customTextField(title: retypePass, hint: passwordHint),
+              customTextField(
+                  title: name,
+                  hint: nameHint,
+                  controller: nameController,
+                  isPass: false),
+              customTextField(
+                  title: email,
+                  hint: emailHint,
+                  controller: emailController,
+                  isPass: false),
+              customTextField(
+                  title: password,
+                  hint: passwordHint,
+                  controller: passwordController,
+                  isPass: true),
+              customTextField(
+                  title: retypePass,
+                  hint: passwordHint,
+                  controller: passwordRetypeController,
+                  isPass: true),
               Align(
                   alignment: Alignment.centerRight,
                   child: TextButton(
@@ -124,28 +139,33 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
               2.heightBox,
               ourButton(
-                      color: isCheck == true ? darkBlue : lightGrey,
-                      textcolor: whiteColor,
-                      title: signup,
-                      onPress: () {})
-                  .box
-                  .width(context.screenWidth / 3)
-                  .height(39)
-                  .make(),
+                  color: isCheck == true ? darkBlue : lightGrey,
+                  textcolor: whiteColor,
+                  title: signup,
+                  onPress: () async {
+                    if (isCheck != false) {
+                      try {
+                        await controller
+                            .signupMethod(
+                                context: context,
+                                email: emailController.text,
+                                password: passwordController.text)
+                            .then((value) {
+                          return controller.storeUserData(
+                              email: emailController.text,
+                              password: passwordController.text,
+                              name: nameController.text);
+                        }).then((value) {
+                          VxToast.show(context, msg: loggedin);
+                          Get.offAll(() => const Home());
+                        });
+                      } catch (e) {
+                        auth.signOut();
+                        VxToast.show(context, msg: e.toString());
+                      }
+                    }
+                  }).box.width(context.screenWidth / 3).height(39).make(),
               10.heightBox,
-              // RichText(
-              //     text: const TextSpan(children: [
-              //   TextSpan(
-              //     text: alrHaveacc,
-              //     style: TextStyle(fontFamily: bold, color: fontGrey),
-              //   ),
-              //   TextSpan(
-              //     text: login,
-              //     style: TextStyle(fontFamily: bold, color: darkBlue),
-              //   )
-              // ])).onTap(() {
-              //   Get.back();
-              // }),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
