@@ -86,25 +86,25 @@ class ProfileScreen extends StatelessWidget {
                                 children: [
                                   "${data['name']}"
                                       .text
-                                      .size(20)
+                                      .size(24)
                                       .fontFamily(bold)
-                                      .white
+                                      .black
                                       .make(),
                                   5.heightBox,
-                                  "${data['email']}".text.white.make(),
+                                  "${data['email']}".text.black.make(),
                                 ],
                               )),
                               OutlinedButton(
                                 style: OutlinedButton.styleFrom(
                                     side: const BorderSide(
-                                  color: whiteColor,
+                                  color: Colors.black,
                                 )),
                                 onPressed: () async {
                                   await Get.put(AuthController())
                                       .signoutMethod(context);
                                   Get.offAll(() => const LoginScreen());
                                 },
-                                child: logout.text.white.make(),
+                                child: logout.text.black.make(),
                               ),
                             ],
                           ),

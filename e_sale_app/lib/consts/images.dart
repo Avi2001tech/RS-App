@@ -54,6 +54,7 @@ const icWholeSale = "assets/icons/wholesale.png";
 //images
 const newBkgd = "assets/images/sattoo.jpeg";
 const icAdditionalbkgd = "assets/images/sattooDrinkBg.png";
+const icAdditionalbkgd2 = "assets/images/sattooDrinkBkgd.png";
 const imgBackground = "assets/icons/bg.png";
 const imgB1 = "assets/images/b1.jpeg";
 const imgB2 = "assets/images/b2.jpeg";
