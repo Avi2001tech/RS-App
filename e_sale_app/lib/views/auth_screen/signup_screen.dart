@@ -40,150 +40,142 @@ class _SignupScreenState extends State<SignupScreen> {
         children: [
           (context.screenHeight * 0.25).heightBox,
           5.heightBox,
-          Column(
-            children: [
-              "Join our Community".text.make(),
-              "$appname"
-                  .text
-                  .fontFamily(bold)
-                  .underline
-                  .italic
-                  .blue900
-                  .size(18)
-                  .make(),
-              10.heightBox,
-              customTextField(
-                  title: name,
-                  hint: nameHint,
-                  controller: nameController,
-                  isPass: false),
-              customTextField(
-                  title: email,
-                  hint: emailHint,
-                  controller: emailController,
-                  isPass: false),
-              customTextField(
-                  title: password,
-                  hint: passwordHint,
-                  controller: passwordController,
-                  isPass: true),
-              customTextField(
-                  title: retypePass,
-                  hint: passwordHint,
-                  controller: passwordRetypeController,
-                  isPass: true),
-              Align(
-                  alignment: Alignment.centerRight,
-                  child: TextButton(
-                      onPressed: () {},
-                      child: forgetPassword.text.purple900.make())),
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.center,
-              //   children: List.generate(
-              //       3,
-              //       (index) => Padding(
-              //             padding: const EdgeInsets.all(12.0),
-              //             child: CircleAvatar(
-              //               backgroundColor: Colors.transparent,
-              //               //radius: 25,
-              //               child: Image.asset(
-              //                 socialIconList[index],
-              //                 width: 30,
-              //               ),
-              //             ),
-              //           )),
-              // ),
-              Row(
-                children: [
-                  Checkbox(
-                    activeColor: darkBlue,
-                    checkColor: whiteColor,
-                    value: isCheck,
-                    onChanged: (newValue) {
-                      setState(() {
-                        isCheck = newValue;
-                      });
-                    },
-                  ),
-                  4.widthBox,
-                  Expanded(
-                    child: RichText(
-                        text: const TextSpan(children: [
-                      TextSpan(
-                          text: "I agree to the ",
-                          style: TextStyle(
-                            fontFamily: semibold,
-                            color: Colors.black,
-                          )),
-                      TextSpan(
-                          text: temrsAndcond,
-                          style: TextStyle(
-                            fontFamily: bold,
-                            color: darkBlue,
-                          )),
-                      TextSpan(
-                          text: " & ",
-                          style: TextStyle(
-                            fontFamily: bold,
-                            color: Colors.black,
-                          )),
-                      TextSpan(
-                          text: privPolicy,
-                          style: TextStyle(
-                            fontFamily: bold,
-                            color: darkBlue,
-                          )),
-                    ])),
-                  ),
-                ],
-              ),
-              2.heightBox,
-              ourButton(
-                  color: isCheck == true ? darkBlue : lightGrey,
-                  textcolor: whiteColor,
-                  title: signup,
-                  onPress: () async {
-                    if (isCheck != false) {
-                      try {
-                        await controller
-                            .signupMethod(
-                                context: context,
-                                email: emailController.text,
-                                password: passwordController.text)
-                            .then((value) {
-                          return controller.storeUserData(
-                              email: emailController.text,
-                              password: passwordController.text,
-                              name: nameController.text);
-                        }).then((value) {
-                          VxToast.show(context, msg: loggedin);
-                          Get.offAll(() => const Home());
+          Obx(
+            () => Column(
+              children: [
+                "Join our Community".text.make(),
+                "$appname"
+                    .text
+                    .fontFamily(bold)
+                    .underline
+                    .italic
+                    .blue900
+                    .size(18)
+                    .make(),
+                10.heightBox,
+                customTextField(
+                    title: name,
+                    hint: nameHint,
+                    controller: nameController,
+                    isPass: false),
+                customTextField(
+                    title: email,
+                    hint: emailHint,
+                    controller: emailController,
+                    isPass: false),
+                customTextField(
+                    title: password,
+                    hint: passwordHint,
+                    controller: passwordController,
+                    isPass: true),
+                customTextField(
+                    title: retypePass,
+                    hint: passwordHint,
+                    controller: passwordRetypeController,
+                    isPass: true),
+                Align(
+                    alignment: Alignment.centerRight,
+                    child: TextButton(
+                        onPressed: () {},
+                        child: forgetPassword.text.purple900.make())),
+                Row(
+                  children: [
+                    Checkbox(
+                      activeColor: darkBlue,
+                      checkColor: whiteColor,
+                      value: isCheck,
+                      onChanged: (newValue) {
+                        setState(() {
+                          isCheck = newValue;
                         });
-                      } catch (e) {
-                        auth.signOut();
-                        VxToast.show(context, msg: e.toString());
-                      }
-                    }
-                  }).box.width(context.screenWidth / 3).height(39).make(),
-              10.heightBox,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  alrHaveacc.text.color(Colors.black).make(),
-                  login.text.color(darkBlue).make().onTap(() {
-                    Get.back();
-                  }),
-                ],
-              ),
-            ],
-          )
-              .box
-              .orange300
-              .rounded
-              .padding(const EdgeInsets.all(16))
-              .width(context.screenWidth - 70)
-              .shadowSm
-              .make(),
+                      },
+                    ),
+                    4.widthBox,
+                    Expanded(
+                      child: RichText(
+                          text: const TextSpan(children: [
+                        TextSpan(
+                            text: "I agree to the ",
+                            style: TextStyle(
+                              fontFamily: semibold,
+                              color: Colors.black,
+                            )),
+                        TextSpan(
+                            text: temrsAndcond,
+                            style: TextStyle(
+                              fontFamily: bold,
+                              color: darkBlue,
+                            )),
+                        TextSpan(
+                            text: " & ",
+                            style: TextStyle(
+                              fontFamily: bold,
+                              color: Colors.black,
+                            )),
+                        TextSpan(
+                            text: privPolicy,
+                            style: TextStyle(
+                              fontFamily: bold,
+                              color: darkBlue,
+                            )),
+                      ])),
+                    ),
+                  ],
+                ),
+                2.heightBox,
+                controller.isLoading.value
+                    ? const CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation(darkBlue),
+                      )
+                    : ourButton(
+                        color: isCheck == true ? darkBlue : lightGrey,
+                        textcolor: whiteColor,
+                        title: signup,
+                        onPress: () async {
+                          if (isCheck != false) {
+                            controller.isLoading(true);
+                            try {
+                              await controller
+                                  .signupMethod(
+                                      context: context,
+                                      email: emailController.text,
+                                      password: passwordController.text)
+                                  .then((value) {
+                                return controller.storeUserData(
+                                    email: emailController.text,
+                                    password: passwordController.text,
+                                    name: nameController.text);
+                              }).then((value) {
+                                VxToast.show(context, msg: loggedin);
+                                Get.offAll(() => const Home());
+                              });
+                            } catch (e) {
+                              auth.signOut();
+                              VxToast.show(context, msg: e.toString());
+                              controller.isLoading(false);
+                            }
+                          }
+                        }).box.width(context.screenWidth / 3).height(39).make(),
+                10.heightBox,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    alrHaveacc.text.color(Colors.black).make(),
+                    login.text.color(darkBlue).make().onTap(() {
+                      Get.back();
+                    }),
+                  ],
+                ),
+              ],
+            )
+                .box
+                .orange300
+                .rounded
+                .padding(const EdgeInsets.all(16))
+                .width(context.screenWidth - 70)
+                .shadowSm
+                .make(),
+          ),
           8.heightBox,
         ],
       )).scrollVertical(),
